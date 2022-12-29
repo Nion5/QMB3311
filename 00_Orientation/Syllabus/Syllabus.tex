@@ -3,7 +3,6 @@
 \usepackage{hyperref}
 \usepackage{xcolor}
 \usepackage{amsmath}
-\usepackage{natbib}
 \geometry{
   top = 1in
   , bottom = 1in
@@ -24,27 +23,30 @@
 \maketitle
 \hrulefill
 
-\section*{Course Information}
-\begin{flushleft}
-\begin{tabular}{| l | l |}\hline
+\begin{table}[!htb]
+    \begin{minipage}{.5\linewidth}
+      \centering
+ \begin{tabular}{| l | l |}\hline
  Course & QMB 3311-23Spring 0001 \\\hline
  Term & Spring 2023 \\\hline
  Meeting Time & TR 10:30am-11:50am\\\hline
  Location & BA1 212\\\hline
  Credit Hours & 3 \\\hline
 \end{tabular}
-\end{flushleft}
-
-
-\section*{Instructor Information}
-\begin{flushleft}
+    \end{minipage}%
+    \begin{minipage}{.5\linewidth}
+      \centering
 \begin{tabular}{| l | l |}\hline
  Instructor & Joshua L. Eubanks \\\hline
  Office & BA2 302Y \\\hline
- Hours & TR 1:00pm - 2:00pm or by appointment \\\hline
+ Hours & TR 1:30pm - 2:30pm or by appointment \\\hline
  Email & Email through Webcourses \\\hline
 \end{tabular}
-\end{flushleft}
+    \end{minipage} 
+\end{table}
+
+
+
 
 \section*{Important Dates}
 
@@ -53,7 +55,6 @@
   \item \textbf{Final}: May 02, 2023 10:00am – 12:50pm
 \end{itemize}
 
-\newpage
 
 \tableofcontents
 
@@ -69,7 +70,7 @@ Please read these rules carefully.
 
 \item I do not ``give'' grades, I merely record them. I am only able to change a grade if there is a clerical error. Any emails that fall into the category of ``academic panhandling'' (extra credit, ``grade bumping'', negotiations, etc.) will be ignored. I will not reevaluate coursework after the term is finished.
 
-\item Make-up opportunities are not given. If a student misses a quiz or a homework, they can count it as a dropped assignment. If they miss the midterm exam, they must provide what a valid excuse within a week of the missed midterm. If I deem the excuse valid, then their final exam will count in-place of the missed exam. 
+\item Make-up opportunities are not given. If a student misses a quiz or a homework, they can count it as a dropped assignment. If they miss the midterm exam, they must provide a valid excuse within a week of the missed midterm. If I deem the excuse valid, then their final exam will count in-place of the missed exam. 
 
 \item Quizzes and exams can cover all the material (assignments, lectures, textbook, etc.) I have assigned. Questions about what questions, number of questions, etc. will not be discussed during class.
 
@@ -85,36 +86,19 @@ Please read these rules carefully.
 \subsection{Textbooks}
 
 \begin{itemize}
-\item \citet{griesetal:2017}
+\item Paul Gries, Jennifer Campbell, and Jason Montojo. \textit{Practical programming: an introduction to computer science using Python 3.6}. Pragmatic Bookshelf, 2017.
 
-\item \citet{taddy:2019}
+\item Matt Taddy. \textit{Business data science: Combining machine learning and economics to optimize, automate, and accelerate business decisions}. McGraw Hill Professional, 2019.
 
-\item Optional:  \citet{adledore:2014}
+\item \texttt{Optional:}  Mortimer J Adler and Charles Van Doren. \textit{How to read a book: The classic guide to intelligent reading}. Simon and Schuster, 2014.
 
 \end{itemize}
 
 \subsection{Software}
 \begin{itemize}
-\item A python distribution
-\item An IDE (interactive development environment). We will be using Spyder, which is within the Anaconda distribution of python
-\item GitHub. This is a common version control software.
+\item \texttt{Anaconda:} Anaconda is the most popular python distribution. It also installs many other packages by default, avoiding the requirement to install many of the packages manually. Additionally, it contains Spyder, a nice graphical user interface (GUI) that helps you navigate python easier.	
+\item \texttt{GitHub Desktop:} GitHub is an excellent version control software used by many large companies. Think of it as a ``OneDrive/Google Drive" for programmers. It provides a history of all the saved changes you have made and allows for easy collaboration. There are many other features of GitHub that allow you to make changes from the command line, however, GitHub Desktop avoids the command line.
 \end{itemize}
-
-\section{Course Description and Learning Objectives}
-
-At the end of the course, a student should be able to solve quantitavtive problems using python. The skills provided will be valuable if a student is pursuing a career in business analytics. After completing the course, a student should be able to:
-
-\begin{itemize}
-\item Understand data types and basic operations
-\item Use existing python modules to solve problems
-\item Create new python modules and functions
-\item Understand linear alegrbra and implement it via python
-\item Manage and analyze data to solve business problems
-\item Understand the distinction between written calculations and computer calculations 
-\end{itemize}
-
-For the official course description please refer to the \href{http://catalog.ucf.edu/search_advanced.php?catoid=14}{Undergraduate Catalog}.
-
 
 \section{Course Structure}
 
@@ -156,6 +140,20 @@ The tentative schedule is as follows:
 \end{tabular}
 \end{center}
 
+\section{Course Description and Learning Objectives}
+
+At the end of the course, a student should be able to solve quantitavtive problems using python. The skills provided will be valuable if a student is pursuing a career in business analytics. After completing the course, a student should be able to:
+
+\begin{itemize}
+\item Understand data types and basic operations
+\item Use existing python modules to solve problems
+\item Create new python modules and functions
+\item Understand linear alegrbra and implement it via python
+\item Manage and analyze data to solve business problems
+\item Understand the distinction between written calculations and computer calculations 
+\end{itemize}
+
+For the official course description please refer to the \href{http://catalog.ucf.edu/search_advanced.php?catoid=14}{Undergraduate Catalog}.
 
 \section{Grading and Assignments}
 
@@ -205,7 +203,7 @@ There will be at least 6 quizzes. The quizzes open-book and open-notes, cover an
 You can expect 8 assignments throughout the semester, but I only count the top 6. Be sure to complete all the assignments as future assessments may require you to reference previous homework
 
 \subsubsection{Midterm}
-This will be a written exam on February 28, 2023 consisting of short and long answer questions. The exam is written to be completed within 1 hour and 15 minutes. The exams will be in a digital format and will focus on quantitative problem solving using python.
+This will be an exam on February 28, 2023. The exam is written to be completed within 1 hour and 15 minutes. The exams will be in a digital format and will focus on quantitative problem solving using python.
 
 \subsubsection{Final Exam}
 According to UCF policy, all courses must have a final examination or assessment. The format of the exam will be a combination of short and long answer questions.\\
@@ -269,6 +267,4 @@ As of Fall 2014, all faculty members are required to document the student's acad
 \subsection{Student Accessibility Services}
 The University of Central Florida is committed to providing access and inclusion for all persons with disabilities. Students with disabilities who need disability-related access in this course should contact the lecturer as soon as possible. Students should also connect with \href{https://sas.sdes.ucf.edu}{Student Accessibility Services} located at Ferrell Commons room 185, by \href{mailto:emailsas@ucf.edu}{email}, or phone 407-823-2371. Through Student Accessibility Services, a Course Accessibility Letter may be created and sent to professors, which informs faculty of potential access and accommodations that might be reasonable. Determining reasonable access and accommodations requires consideration of the course design, course learning objectives and the individual academic and course barriers experienced by the student.
 
-\bibliographystyle{plainnat}
-\bibliography{References}
 \end{document}
