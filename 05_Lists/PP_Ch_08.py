@@ -500,6 +500,7 @@ life[2]
 # which is the element in position zero. 
 # This type of operation is referred to as *chaining*. 
 
+colors[0][0]
 
 # To select elements of the individual lists within the full list, 
 # use a second pair of square brackets. 
