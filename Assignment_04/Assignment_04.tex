@@ -1,0 +1,104 @@
+\documentclass[11pt]{exam}
+
+\usepackage{amsmath}
+
+\begin{document}
+
+\texttt{Assignment 4 --- QMB 3311 ---  Spring 2023  --- Due: February 19, 2023}
+
+\subsection*{Instructions:}
+
+Complete this assignment within the space on your \textit{private} GitHub repo in a folder called \texttt{Assignment\_04}. In this folder, save your answers to a file called \texttt{my\_A4\_functions.py}, following the sample script in the folder \texttt{Assignment\_04} in the course repository. When you are finished, submit your files to your repository and upload the link to Webcourses.
+
+For all of the exercises, use your examples to test the functions you defined. Since the examples are all contained within the docstrings of your functions, you can use the
+\texttt{doctest.testmod()} function within the doctest module to test your functions automatically. Add some code to the sample script \texttt{my\_A4\_functions.py}, run the entire script, and paste the output to a file called \texttt{my\_A4\_functions.out}.
+
+Don't worry about false alarms: if there are some ``failures'' that are only different in the smaller decimal places, then your function is good enough. It is much more important that your function runs without throwing an error.
+
+    \begin{questions}
+
+\question Follow the function design recipe to define functions for all of the following exercises. for each function, create three examples to test your functions. Record the definitions in the sample script \texttt{my\_A4\_functions.py}
+
+
+	\begin{parts}
+\part Write a function \texttt{matrix\_inverse(mat\_in)} that replicates teh \texttt{numpy} method \texttt{linalg.inv()} that calculates the inverse of a two-by-two matrix \texttt{mat\_in}.
+
+The inverse of the matrix $A$ denoted $A^{-1}$, is a matrix the same size as $A$ such that $A\cdot A^{-1} = I$, where $I$ is the identity matrix with ones on the diagonal and zeros elsewhere. It can be used to solve the systems of equations $A\cdot x = b$ by multiplying $A^{-1}$ with $b$ to get $x = A^{-1}\cdot b$
+
+For a two-by-two matrix $A$, the inverse can be obtained with the expression
+
+\begin{equation*}
+A^{-1} = \frac{1}{a_{11}a_{22}-a_{12}a_{21}}
+    \begin{bmatrix}
+        a_{22} & -a_{12}\\
+        -a_{21} & a_{11}
+    \end{bmatrix}
+\end{equation*}
+
+where matrix $A$ is defined as
+
+$$A = \begin{bmatrix}
+        a_{11} & a_{12}\\
+        a_{21} & a_{22}
+      \end{bmatrix} $$
+
+\begin{itemize}
+    \item Your function should take in a two-by-two \texttt{numpy} array and output a \texttt{numpy} array \texttt{mat\_out} with the same number of rows and columns as \texttt{mat\_in}, that is, two-by-two, following the definition of $A^{-1}$ above when the arguement $A$ is passed as \texttt{mat\_in}.
+
+    \item It should use two nested loops, one for the row of the output and one for the column of output.
+
+    \item The return value should be a matrix that solves the system of equations $A\cdot x = b$ by multiplying the output with $b$.
+
+    \item You can use the command \texttt{mat\_in.dot(mat\_out)} to produce the output for two test cases: it should be the identity matrix with ones on the diagonal and zeroes elsewhere. The command \texttt{mat\_out.dot(mat\_in)} will have the same result
+
+    \item You can use the command \texttt{mat\_in.dot(x)} to produce the output for another test case: \texttt{mat\_in.dot(x)} returns a value of \texttt{b}. Then \texttt{mat\_out.dot(b)} returns the original value of \texttt{x}.
+
+    \item Carefully inspect the expressions in $A^{-1}$ and note any potential problems. Your function should return \texttt{None} and print a warning message if the problem occurs. Use this condition to formulate a fourth test case.
+\end{itemize}
+
+\part The likelihood function of the logistic regression model is used to estimate coefficients in logistic regression. Logistic regression is used to model binary events, i.e. whether or not an event occurred. For each observation $i$, the observation $y_{i}$ equals 1 if the event occurred and 0 if it did not. Build on the function \texttt{logit\_like()} from Assignment 3 and write a python function \texttt{logit\_like\_sum()} that calculates the sum of teh log-likelihoond across all observation $(y_{i},x_{i}, i = 1, ... , n$. That is, it returns the sum of either the log of the function $\ell(x;\beta_{0},\beta_{1})$ if $y_{i} = 1$ or the log of the function $(1 - \ell(x;\beta_{0},\beta_{1}))$ if $y_{i} = 0$, over all observation $i = 1,...,n$:
+
+$$L(y,x;\beta_{0},\beta_{1}) = \sum_{i=1}^{n}L_{i}(y_{i},x_{i};\beta_{0},\beta_{1})$$
+
+where $L_{i}(y_{i},x_{i};\beta_{0},\beta_{1})$ refers to the log of either $\ell$ or $(1-\ell)$ as described above with the logit link function $\ell$ defined as
+
+$$\ell(x;\beta_{0},\beta_{1}) = Prob(y=1 | x) = \frac{e^{\beta_{0}+x\beta_{1}}}{1 + e^{\beta_{0}+x\beta_{1}}}$$
+
+This function \texttt{logit\_like\_sum()} will have the four arguements $L(y,x;\beta_{0},\beta_{1})$, in that order, where the sample observations $y$ and $x$ are both either lists or \texttt{numpy} arrays.
+
+\part The \textit{gradient vector} of a multivariate function is a vector with each element equal to the derivatrive of the function with respect to each parameter. It the case of $L(y,x;\beta_{0},\beta_{1})$, element $k$ is
+
+$$\frac{\partial L(y,x;\beta_{0},\beta_{1})}{\partial \beta_{k}} = \sum_{i=1}^{n} \frac{\partial}{\partial \beta_{k}} L_{i}(y_{i},x_{i};\beta_{0},\beta_{1})$$
+
+for $k=0$ or $k=1$, corresponding to $\beta_{0}$ or $\beta_{1}$ where $L_{i}(y_{i},x_{i};\beta_{0},\beta_{1})$ is defined in the previous exercise above.
+
+Using calculus, one can determine that 
+
+\begin{equation*}
+\frac{\partial}{\partial \beta_{k}} L_{i}(y_{i},x_{i};\beta_{0},\beta_{1}) = 
+\begin{cases}
+    d_{i}(1-\ell(x;\beta_{0},\beta_{1})), & \text{if } y_{i} = 1,\\ 
+    d_{i}(-\ell(x;\beta_{0},\beta_{1})), & \text{if } y_{i} = 0,\\
+    \text{undefined} & \text{otherwise}
+\end{cases}
+\end{equation*}
+
+where $$d_{i} = \begin{cases}
+1, & \text{for } k = 0,\\
+x_{i}, & \text{for } k = 1
+\end{cases}$$
+
+Define a function \texttt{logit\_like\_grad()} that will have the four arguements in $(y,x;\beta_{0},\beta_{1})$, in that order, and will output a vector of two elements corresponding the the parameters $\beta_{0}$ and $\beta_{1}$. Your manager consulted an expert in econometrics, who provided some test cases in the script \texttt{my\_A4\_functions.py}
+
+\part In a previous assignment, you wrote a function \texttt{CESutility\_valid()} that calculated the value of the Constant Elasticity of Substitution utility function $u(x,y;r) = (x^{r}+y^{r})^{\frac{1}{r}}$. for valud values of the parameters $x,y,$ and $r$. Now extend this function to evaluate the consumer's utility for more than two goods:
+
+$$u(\text{\textbf{x}}, \text{\textbf{a}}; r) = \left(\sum_{i=1}^{n}a_{i}^{1-r}x_{i}^{r}\right)^{\frac{1}{r}},$$
+        
+where \textbf{x} is a vector of quantities of goods consumed and \textbf{a} is a vector of weighting parameters for each good and the subscript $i$ indicates the $i$th element of each vector. 
+
+In this function, the first two arguements are \textbf{x} and \textbf{a} and the third is still $r$. Call this function \texttt{CESutility\_multi(x, a, r)} and make sure to include the logic to determine whether the inputs are valid, as in \texttt{CESutility\_valid()}, except all elements of \textbf{x} and \textbf{a} must be nonnegative, and return \texttt{None} otherwise.
+        \end{parts}
+
+    \end{questions}
+
+\end{document}
